@@ -7,7 +7,9 @@ import { defineConfig } from "vite";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// https://vite.dev/config/
+// Твой домен с Railway (замени на свой, если он отличается)
+const RAILWAY_HOST = "my-site-example-production.up.railway.app"; 
+
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
@@ -21,6 +23,8 @@ export default defineConfig({
   },
   preview: {
     host: '0.0.0.0',
-    port: parseInt(process.env.PORT || '4173')
+    port: parseInt(process.env.PORT || '4173'),
+    // 👇 ВОТ ЭТА СТРОКА ИСПРАВЛЯЕТ ОШИБКУ
+    allowedHosts: [RAILWAY_HOST, '.railway.app'] 
   }
 });
